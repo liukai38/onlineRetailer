@@ -5,7 +5,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -32,7 +31,7 @@ public class LoginContoller {
 	@RequestMapping(value = "/login")
 	@ResponseBody
 	public ResLogin login(@RequestBody User req) throws Exception {
-		User user = userService.getUser(req.getName(), req.getPassword());
+		User user = userService.getUser(req.getUserName(), req.getPassword());
 		ResLogin res = new ResLogin();
 		if (null != user) {
 			log.info(user.toString());
@@ -46,7 +45,7 @@ public class LoginContoller {
 	@RequestMapping(value = "/register")
 	@ResponseBody
 	public String register(@RequestBody User user) throws Exception {
-		userService.AddUser(user);
+		userService.addUser(user);
 		log.info(user);
 		
 		return "ok";
